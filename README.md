@@ -1,0 +1,58 @@
+# YouTube Clone - MERN Stack
+
+A full-stack YouTube clone built with MongoDB, Express, React, and Node.js.
+
+## Features
+- User Authentication (JWT)
+- Video Upload & Management
+- Like/Dislike Videos
+- Comments (Add, Edit, Delete)
+- Channel Management
+- Search & Filter Videos
+- Fully Responsive Design
+
+## Tech Stack
+- **Frontend:** React, Vite, React Router, Axios
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB Atlas
+- **Auth:** JWT
+
+## Setup Instructions
+
+### Backend
+```bash
+cd backend
+npm install
+# Add your MongoDB URI in .env
+node server.js
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Seed Data
+```bash
+cd backend
+node seed/seedData.js
+```
+
+## Test Login
+- Email: john@example.com
+- Password: password123
+
+## API Endpoints
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/videos
+- POST /api/videos
+- PUT /api/videos/:id
+- DELETE /api/videos/:id
+- POST /api/channels
+- GET /api/channels/:id
+- POST /api/comments/:videoId
+- PUT /api/comments/:id
+- DELETE /api/comments/:id
