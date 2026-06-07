@@ -56,3 +56,20 @@ node seed/seedData.js
 - POST /api/comments/:videoId
 - PUT /api/comments/:id
 - DELETE /api/comments/:id
+
+
+
+
+## Important Note - MongoDB Atlas DNS Fix
+
+If you face `ECONNREFUSED` error while connecting to MongoDB Atlas,
+add these lines at the top of `backend/server.js` before `dotenv.config()`:
+
+```javascript
+import dns from 'node:dns';
+// Bypass local DNS SRV block (remove in production)
+dns.setServers(['1.1.1.1', '8.8.8.8']);
+```
+
+This is needed when your ISP/network blocks MongoDB Atlas SRV DNS queries.
+This fix uses Cloudflare (1.1.1.1) and Google (8.8.8.8) DNS servers.
