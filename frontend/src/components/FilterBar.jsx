@@ -13,47 +13,22 @@ const FilterBar = ({ activeFilter, onFilterChange }) => {
   ];
 
   return (
-    <div style={styles.container}>
+    <div className="flex gap-3 py-3 overflow-x-auto scrollbar-hide">
       {filters.map((filter) => (
         <button
           key={filter}
           onClick={() => onFilterChange(filter)}
-          style={{
-            ...styles.filterBtn,
-            ...(activeFilter === filter ? styles.activeBtn : {})
-          }}
+          className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-colors duration-200 ${
+            activeFilter === filter
+              ? 'bg-white text-black font-semibold'
+              : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'
+          }`}
         >
           {filter}
         </button>
       ))}
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    gap: '12px',
-    padding: '12px 0',
-    overflowX: 'auto',
-    scrollbarWidth: 'none',
-    msOverflowStyle: 'none',
-  },
-  filterBtn: {
-    padding: '8px 16px',
-    borderRadius: '8px',
-    border: 'none',
-    background: '#272727',
-    color: '#fff',
-    fontSize: '14px',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-    transition: 'background 0.2s',
-  },
-  activeBtn: {
-    background: '#fff',
-    color: '#000',
-  },
 };
 
 export default FilterBar;

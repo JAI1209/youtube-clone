@@ -20,25 +20,33 @@ const Sidebar = ({ isOpen }) => {
   ];
 
   return (
-    <aside style={{ ...styles.sidebar, ...(isOpen ? styles.open : styles.closed) }}>
-      <div style={styles.section}>
+    <aside className={`fixed top-14 left-0 bottom-0 bg-[#0f0f0f] overflow-y-auto transition-all duration-200 z-40 pt-3 ${isOpen ? 'w-60' : 'w-[72px]'}`}>
+      <div className="flex flex-col">
         {menuItems.map((item, index) => (
-          <Link to={item.path} key={index} style={styles.menuItem}>
-            <span style={styles.icon}>{item.icon}</span>
-            {isOpen && <span style={styles.label}>{item.label}</span>}
+          <Link
+            to={item.path}
+            key={index}
+            className="flex items-center gap-4 px-4 py-2 text-white rounded-xl mx-2 hover:bg-[#272727] transition-colors text-sm"
+          >
+            <span className="text-xl min-w-[24px] text-center">{item.icon}</span>
+            {isOpen && <span>{item.label}</span>}
           </Link>
         ))}
       </div>
 
       {isOpen && (
         <>
-          <div style={styles.divider} />
-          <div style={styles.sectionTitle}>Explore</div>
-          <div style={styles.section}>
+          <div className="h-px bg-[#272727] my-3" />
+          <div className="px-4 py-2 text-base font-bold text-white">Explore</div>
+          <div className="flex flex-col">
             {exploreItems.map((item, index) => (
-              <Link to={item.path} key={index} style={styles.menuItem}>
-                <span style={styles.icon}>{item.icon}</span>
-                <span style={styles.label}>{item.label}</span>
+              <Link
+                to={item.path}
+                key={index}
+                className="flex items-center gap-4 px-4 py-2 text-white rounded-xl mx-2 hover:bg-[#272727] transition-colors text-sm"
+              >
+                <span className="text-xl min-w-[24px] text-center">{item.icon}</span>
+                <span>{item.label}</span>
               </Link>
             ))}
           </div>
@@ -46,43 +54,6 @@ const Sidebar = ({ isOpen }) => {
       )}
     </aside>
   );
-};
-
-const styles = {
-  sidebar: {
-    position: 'fixed',
-    top: '56px',
-    left: 0,
-    bottom: 0,
-    background: '#0f0f0f',
-    overflowY: 'auto',
-    transition: 'width 0.2s ease',
-    zIndex: 999,
-    paddingTop: '12px',
-  },
-  open: { width: '240px' },
-  closed: { width: '72px' },
-  section: { display: 'flex', flexDirection: 'column' },
-  menuItem: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '16px',
-    padding: '10px 16px',
-    color: '#fff',
-    borderRadius: '10px',
-    margin: '2px 8px',
-    transition: 'background 0.2s',
-    fontSize: '14px',
-  },
-  icon: { fontSize: '20px', minWidth: '24px', textAlign: 'center' },
-  label: { fontSize: '14px' },
-  divider: { height: '1px', background: '#272727', margin: '12px 0' },
-  sectionTitle: {
-    padding: '8px 16px',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    color: '#fff',
-  },
 };
 
 export default Sidebar;

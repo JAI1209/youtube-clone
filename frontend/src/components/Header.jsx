@@ -20,45 +20,56 @@ const Header = ({ onMenuClick, onSearch }) => {
   };
 
   return (
-    <header style={styles.header}>
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14 bg-[#0f0f0f] border-b border-[#272727]">
       {/* Left */}
-      <div style={styles.left}>
-        <button onClick={onMenuClick} style={styles.menuBtn}>☰</button>
-        <Link to="/" style={styles.logo}>
-          <img src="/YT-logo-B.png" alt="YouTube" style={styles.logoImage} />
+      <div className="flex items-center gap-4">
+        <button onClick={onMenuClick} className="text-white text-xl p-2 rounded-full hover:bg-[#272727]">
+          ☰
+        </button>
+        <Link to="/" className="flex items-center gap-1 text-xl font-bold text-white">
+          <img src="/YT-logo-B.png" alt="YouTube" className="h-6" />
         </Link>
       </div>
 
       {/* Center - Search */}
-      <form onSubmit={handleSearch} style={styles.searchForm}>
+      <form onSubmit={handleSearch} className="flex items-center flex-1 max-w-xl mx-4">
         <input
           type="text"
           placeholder="Search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={styles.searchInput}
+          className="flex-1 px-4 py-2 rounded-l-full border border-[#303030] bg-[#121212] text-white text-base outline-none"
         />
-        <button type="submit" style={styles.searchBtn}>🔍</button>
+        <button type="submit" className="px-4 py-2 rounded-r-full border border-[#303030] bg-[#222] text-white hover:bg-[#333]">
+          🔍
+        </button>
       </form>
 
       {/* Right */}
-      <div style={styles.right}>
+      <div className="flex items-center">
         {user ? (
-          <div style={styles.userSection}>
-            <span style={styles.username}>Hi, {user.username}</span>
-            <div style={styles.avatarContainer}>
+          <div className="flex items-center gap-3">
+            <span className="text-white text-sm hidden md:block">Hi, {user.username}</span>
+            <div className="relative">
               <img
                 src={user.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=default'}
                 alt="avatar"
-                style={styles.avatar}
+                className="w-9 h-9 rounded-full cursor-pointer"
                 onClick={() => setShowDropdown(!showDropdown)}
               />
               {showDropdown && (
-                <div style={styles.dropdown}>
-                  <Link to={`/channel/my`} style={styles.dropdownItem} onClick={() => setShowDropdown(false)}>
+                <div className="absolute right-0 top-11 bg-[#212121] border border-[#303030] rounded-lg overflow-hidden z-50 min-w-[150px]">
+                  <Link
+                    to="/channel/my"
+                    className="block px-4 py-2 text-white hover:bg-[#303030] text-sm border-b border-[#303030]"
+                    onClick={() => setShowDropdown(false)}
+                  >
                     My Channel
                   </Link>
-                  <button onClick={handleLogout} style={styles.dropdownItem}>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full px-4 py-2 text-white hover:bg-[#303030] text-sm text-left"
+                  >
                     Logout
                   </button>
                 </div>
@@ -66,85 +77,13 @@ const Header = ({ onMenuClick, onSearch }) => {
             </div>
           </div>
         ) : (
-          <Link to="/login" style={styles.signInBtn}>
+          <Link to="/login" className="flex items-center gap-2 px-4 py-2 border border-[#3ea6ff] rounded-full text-[#3ea6ff] text-sm hover:bg-[#263850]">
             👤 Sign In
           </Link>
         )}
       </div>
     </header>
   );
-};
-
-const styles = {
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '0 16px',
-    height: '56px',
-    background: '#0f0f0f',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1000,
-    borderBottom: '1px solid #272727',
-  },
-  left: { display: 'flex', alignItems: 'center', gap: '16px' },
-  menuBtn: {
-    background: 'none', border: 'none', color: '#fff',
-    fontSize: '20px', padding: '8px', borderRadius: '50%',
-    cursor: 'pointer',
-  },
-  logo: {
-    position: 'relative',
-    display: 'block',
-    width: '96px',
-    height: '26px',
-    overflow: 'hidden',
-    color: '#fff',
-  },
-  logoImage: {
-    position: 'absolute',
-    left: '-31px',
-    top: '-38px',
-    width: '159px',
-    height: 'auto',
-    display: 'block',
-  },
-  searchForm: { display: 'flex', alignItems: 'center', flex: 1, maxWidth: '600px', margin: '0 20px' },
-  searchInput: {
-    flex: 1, padding: '8px 16px', borderRadius: '20px 0 0 20px',
-    border: '1px solid #303030', background: '#121212',
-    color: '#fff', fontSize: '16px', outline: 'none',
-  },
-  searchBtn: {
-    padding: '8px 16px', borderRadius: '0 20px 20px 0',
-    border: '1px solid #303030', background: '#222',
-    color: '#fff', fontSize: '16px', cursor: 'pointer',
-  },
-  right: { display: 'flex', alignItems: 'center' },
-  userSection: { display: 'flex', alignItems: 'center', gap: '12px' },
-  username: { color: '#fff', fontSize: '14px' },
-  avatarContainer: { position: 'relative' },
-  avatar: { width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer' },
-  dropdown: {
-    position: 'absolute', right: 0, top: '45px',
-    background: '#212121', border: '1px solid #303030',
-    borderRadius: '8px', overflow: 'hidden', zIndex: 1001,
-    minWidth: '150px',
-  },
-  dropdownItem: {
-    display: 'block', padding: '10px 16px', color: '#fff',
-    background: 'none', border: 'none', width: '100%',
-    textAlign: 'left', cursor: 'pointer', fontSize: '14px',
-    borderBottom: '1px solid #303030',
-  },
-  signInBtn: {
-    padding: '8px 16px', border: '1px solid #3ea6ff',
-    borderRadius: '20px', color: '#3ea6ff', fontSize: '14px',
-    display: 'flex', alignItems: 'center', gap: '8px',
-  },
 };
 
 export default Header;

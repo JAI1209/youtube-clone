@@ -33,23 +33,27 @@ const Login = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.box}>
-        <div style={styles.logo}>
-          <img src="/YT-logo-B.png" alt="YouTube" style={styles.logoImage} />
+    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4">
+      <div className="bg-[#212121] p-10 rounded-xl w-full max-w-md border border-[#303030]">
+        <div className="text-2xl font-bold text-white text-center mb-6">
+          <span className="text-red-600">▶</span> YouTube
         </div>
-        <h2 style={styles.title}>Sign In</h2>
+        <h2 className="text-2xl text-white text-center mb-6">Sign In</h2>
 
-        {error && <div style={styles.error}>{error}</div>}
+        {error && (
+          <div className="bg-red-900/20 border border-red-600 text-red-400 px-4 py-3 rounded-lg mb-4 text-sm">
+            {error}
+          </div>
+        )}
 
-        <form onSubmit={handleSubmit} style={styles.form}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            style={styles.input}
+            className="px-4 py-3 rounded-lg border border-[#303030] bg-[#121212] text-white text-base outline-none focus:border-[#3ea6ff]"
           />
           <input
             type="password"
@@ -57,95 +61,24 @@ const Login = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            style={styles.input}
+            className="px-4 py-3 rounded-lg border border-[#303030] bg-[#121212] text-white text-base outline-none focus:border-[#3ea6ff]"
           />
-          <button type="submit" style={styles.btn} disabled={loading}>
+          <button
+            type="submit"
+            disabled={loading}
+            className="py-3 rounded-lg bg-red-600 text-white text-base font-bold mt-2 hover:bg-red-700 transition-colors disabled:opacity-50"
+          >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <p style={styles.switchText}>
+        <p className="text-gray-400 text-center mt-6 text-sm">
           Don't have an account?{' '}
-          <Link to="/register" style={styles.link}>Register</Link>
+          <Link to="/register" className="text-[#3ea6ff] hover:underline">Register</Link>
         </p>
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    minHeight: '100vh',
-    background: '#0f0f0f',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    background: '#212121',
-    padding: '40px',
-    borderRadius: '12px',
-    width: '100%',
-    maxWidth: '400px',
-    border: '1px solid #303030',
-  },
-  logo: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '24px',
-  },
-  logoImage: {
-    width: '219px',
-    height: '146px',
-    objectFit: 'cover',
-    objectPosition: '50% 50%',
-    clipPath: 'inset(36% 20% 40% 20%)',
-    display: 'block',
-    margin: '-52px -44px',
-  },
-  title: {
-    fontSize: '24px',
-    color: '#fff',
-    marginBottom: '24px',
-    textAlign: 'center',
-  },
-  error: {
-    background: '#ff000022',
-    border: '1px solid #ff0000',
-    color: '#ff6666',
-    padding: '10px',
-    borderRadius: '8px',
-    marginBottom: '16px',
-    fontSize: '14px',
-  },
-  form: { display: 'flex', flexDirection: 'column', gap: '16px' },
-  input: {
-    padding: '12px 16px',
-    borderRadius: '8px',
-    border: '1px solid #303030',
-    background: '#121212',
-    color: '#fff',
-    fontSize: '16px',
-    outline: 'none',
-  },
-  btn: {
-    padding: '12px',
-    borderRadius: '8px',
-    border: 'none',
-    background: '#ff0000',
-    color: '#fff',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    marginTop: '8px',
-  },
-  switchText: {
-    color: '#aaa',
-    textAlign: 'center',
-    marginTop: '24px',
-    fontSize: '14px',
-  },
-  link: { color: '#3ea6ff' },
 };
 
 export default Login;
