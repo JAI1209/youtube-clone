@@ -5,7 +5,8 @@ import User from '../models/User.js';
 import Video from '../models/Video.js';
 import Channel from '../models/Channel.js';
 import Comment from '../models/Comment.js';
-
+import dns from 'node:dns';
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 dotenv.config();
 
 const seedData = async () => {

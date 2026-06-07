@@ -36,7 +36,7 @@ const Login = () => {
     <div style={styles.container}>
       <div style={styles.box}>
         <div style={styles.logo}>
-          <span style={styles.logoRed}>▶</span> YouTube
+          <img src="/YT-logo-B.png" alt="YouTube" style={styles.logoImage} />
         </div>
         <h2 style={styles.title}>Sign In</h2>
 
@@ -90,13 +90,19 @@ const styles = {
     border: '1px solid #303030',
   },
   logo: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
     marginBottom: '24px',
   },
-  logoRed: { color: '#ff0000' },
+  logoImage: {
+    width: '219px',
+    height: '146px',
+    objectFit: 'cover',
+    objectPosition: '50% 50%',
+    clipPath: 'inset(36% 20% 40% 20%)',
+    display: 'block',
+    margin: '-52px -44px',
+  },
   title: {
     fontSize: '24px',
     color: '#fff',

@@ -25,7 +25,7 @@ const Header = ({ onMenuClick, onSearch }) => {
       <div style={styles.left}>
         <button onClick={onMenuClick} style={styles.menuBtn}>☰</button>
         <Link to="/" style={styles.logo}>
-          <span style={styles.logoRed}>▶</span> YouTube
+          <img src="/YT-logo-B.png" alt="YouTube" style={styles.logoImage} />
         </Link>
       </div>
 
@@ -97,10 +97,21 @@ const styles = {
     cursor: 'pointer',
   },
   logo: {
-    display: 'flex', alignItems: 'center', gap: '4px',
-    fontSize: '20px', fontWeight: 'bold', color: '#fff',
+    position: 'relative',
+    display: 'block',
+    width: '96px',
+    height: '26px',
+    overflow: 'hidden',
+    color: '#fff',
   },
-  logoRed: { color: '#ff0000', fontSize: '24px' },
+  logoImage: {
+    position: 'absolute',
+    left: '-31px',
+    top: '-38px',
+    width: '159px',
+    height: 'auto',
+    display: 'block',
+  },
   searchForm: { display: 'flex', alignItems: 'center', flex: 1, maxWidth: '600px', margin: '0 20px' },
   searchInput: {
     flex: 1, padding: '8px 16px', borderRadius: '20px 0 0 20px',

@@ -6,7 +6,9 @@ import authRoutes from './routes/authRoutes.js';
 import videoRoutes from './routes/videoRoutes.js';
 import channelRoutes from './routes/channelRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
-
+import dns from 'node:dns';
+// Force Node to use Cloudflare and Google DNS to bypass local SRV block
+dns.setServers(['1.1.1.1', '8.8.8.8']); // Cloudflare and Google DNS Remove it in Production 
 dotenv.config();
 connectDB();
 
