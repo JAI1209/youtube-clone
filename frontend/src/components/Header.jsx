@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { MdSearch, MdAccountCircle, MdVideoLibrary, MdLogout } from 'react-icons/md';
+
+const FALLBACK_AVATAR = 'https://api.dicebear.com/7.x/avataaars/svg?seed=default';
 
 const Header = ({ onMenuClick, onSearch }) => {
   const { user, logout } = useAuth();
@@ -20,65 +23,64 @@ const Header = ({ onMenuClick, onSearch }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14 bg-[#0f0f0f] border-b border-[#272727]">
+    <header className="yt-header">
       {/* Left */}
-      <div className="flex items-center gap-4">
-        <button onClick={onMenuClick} className="text-white text-xl p-2 rounded-full hover:bg-[#272727]">
+      <div className="yt-header__left">
+        <button className="yt-header__menu-btn" onClick={onMenuClick} aria-label="Menu">
           ☰
         </button>
-        <Link to="/" className="flex items-center gap-1 text-xl font-bold text-white">
-          <img src="/YT-logo-B.png" alt="YouTube" className="h-6" />
+        <Link to="/" className="yt-header__logo">
+          <img
+            src="/YT-logo-B.png"
+            alt="YouTube"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+              e.currentTarget.nextElementSibling.style.display = 'flex';
+            }}
+          />
+          <span style={{ display: 'none', alignItems: 'center', gap: '6px', color: '#fff', fontWeight: 700, fontSize: '18px' }}>
+            <span style={{ color: '#ff0000' }}>▶</span> YouTube
+          </span>
         </Link>
       </div>
 
-      {/* Center - Search */}
-      <form onSubmit={handleSearch} className="flex items-center flex-1 max-w-xl mx-4">
+      {/* Center */}
+      <form className="yt-header__search" onSubmit={handleSearch}>
         <input
           type="text"
           placeholder="Search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 px-4 py-2 rounded-l-full border border-[#303030] bg-[#121212] text-white text-base outline-none"
         />
-        <button type="submit" className="px-4 py-2 rounded-r-full border border-[#303030] bg-[#222] text-white hover:bg-[#333]">
-          🔍
-        </button>
+        <button type="submit" aria-label="Search"><MdSearch size={22} /></button>
       </form>
 
       {/* Right */}
-      <div className="flex items-center">
+      <div className="yt-header__right" style={{ position: 'relative' }}>
         {user ? (
-          <div className="flex items-center gap-3">
-            <span className="text-white text-sm hidden md:block">Hi, {user.username}</span>
-            <div className="relative">
-              <img
-                src={user.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=default'}
-                alt="avatar"
-                className="w-9 h-9 rounded-full cursor-pointer"
-                onClick={() => setShowDropdown(!showDropdown)}
-              />
-              {showDropdown && (
-                <div className="absolute right-0 top-11 bg-[#212121] border border-[#303030] rounded-lg overflow-hidden z-50 min-w-[150px]">
-                  <Link
-                    to="/channel/my"
-                    className="block px-4 py-2 text-white hover:bg-[#303030] text-sm border-b border-[#303030]"
-                    onClick={() => setShowDropdown(false)}
-                  >
-                    My Channel
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="block w-full px-4 py-2 text-white hover:bg-[#303030] text-sm text-left"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+          <>
+            <span className="yt-header__username">Hi, {user.username}</span>
+            <img
+              src={user.avatar || FALLBACK_AVATAR}
+              alt="avatar"
+              className="yt-header__avatar"
+              onClick={() => setShowDropdown((v) => !v)}
+              onError={(e) => { e.currentTarget.src = FALLBACK_AVATAR; }}
+            />
+            {showDropdown && (
+              <div className="yt-header__dropdown">
+                <Link to="/channel/my" onClick={() => setShowDropdown(false)}>
+                  <MdVideoLibrary size={18} /> My Channel
+                </Link>
+                <button onClick={handleLogout}>
+                  <MdLogout size={18} /> Logout
+                </button>
+              </div>
+            )}
+          </>
         ) : (
-          <Link to="/login" className="flex items-center gap-2 px-4 py-2 border border-[#3ea6ff] rounded-full text-[#3ea6ff] text-sm hover:bg-[#263850]">
-            👤 Sign In
+          <Link to="/login" className="yt-signin-btn">
+            <MdAccountCircle size={20} /> Sign In
           </Link>
         )}
       </div>
