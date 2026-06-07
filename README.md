@@ -5,7 +5,7 @@ A full-stack YouTube clone built with MongoDB, Express, React, and Node.js.
 [GitHub - YouTube Clone](https://github.com/JAI1209/youtube-clone)
 
 ## 📸 Demo
-> Video demo coming soon
+> [Video demo coming soon](https://drive.google.com/file/d/13lqHYu8AkpG-OrOhdmSY4H6IfQq74--z/view?usp=sharing)
 ## Features
 - User Authentication (JWT)
 - Video Upload & Management
