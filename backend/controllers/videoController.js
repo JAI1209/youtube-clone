@@ -31,7 +31,7 @@ export const getVideoById = async (req, res) => {
     const video = await Video.findByIdAndUpdate(
       req.params.id,
       { $inc: { views: 1 } },
-      { new: true }
+      { returnDocument: 'after' }
     )
       .populate('channelId', 'channelName description')
       .populate('uploader', 'username avatar');
@@ -84,7 +84,7 @@ export const updateVideo = async (req, res) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    const updated = await Video.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updated = await Video.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' });
     res.json(updated);
   } catch (error) {
     res.status(500).json({ message: error.message });
