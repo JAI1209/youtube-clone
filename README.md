@@ -1,7 +1,11 @@
 # YouTube Clone - MERN Stack
 
 A full-stack YouTube clone built with MongoDB, Express, React, and Node.js.
+## 🔗 Repository
+[GitHub - YouTube Clone](https://github.com/JAI1209/youtube-clone)
 
+## 📸 Demo
+> Video demo coming soon
 ## Features
 - User Authentication (JWT)
 - Video Upload & Management
